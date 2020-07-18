@@ -2,18 +2,22 @@
 
 import random
 import string
+import threading
 
 
+lock = threading.Lock()
 CURRENCY_TRADE_IDS = {}
 
 
 def generate():
     currency_trade_id = get_seven_character_alphanum()
 
+    lock.acquire()
     while CURRENCY_TRADE_IDS.get(currency_trade_id):
         currency_trade_id = get_seven_character_alphanum()
-
     CURRENCY_TRADE_IDS[currency_trade_id] = True
+    lock.release()
+
     return currency_trade_id
 
 
