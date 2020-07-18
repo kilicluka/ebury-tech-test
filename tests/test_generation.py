@@ -45,7 +45,7 @@ def test_ids_are_unique_generated_in_bulk():
 def test_concurrent_bulk_generation():
     generated_ids = set()
     bulk_args = []
-    for _ in range(0,2000):
+    for _ in range(0, 2000):
         bulk_args.append(2500)
 
     with ThreadPoolExecutor(max_workers=15) as pool:
