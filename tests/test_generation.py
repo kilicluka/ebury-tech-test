@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 
+from concurrent.futures import ThreadPoolExecutor
 import pytest
 from identity.generation import generate, generate_bulk
 
@@ -39,3 +40,17 @@ def test_ids_are_unique_generated_in_bulk():
         generated_ids.update(generate_bulk(1000))
         generated_count += 1
         assert len(generated_ids) == generated_count * 1000
+
+
+def test_concurrent_bulk_generation():
+    generated_ids = set()
+    bulk_args = []
+    for _ in range(0,2000):
+        bulk_args.append(2500)
+
+    with ThreadPoolExecutor(max_workers=15) as pool:
+        ids = list(pool.map(generate_bulk, bulk_args))
+        for chunk in ids:
+            generated_ids.update(chunk)
+
+    assert len(generated_ids) == 5000000
