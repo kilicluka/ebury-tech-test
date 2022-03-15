@@ -1,4 +1,4 @@
-Tech test for a position of a Software Engineer at Ebury. My code is in the `identity` directory. The task had a set of failing tests and the goal was to change the code until they all started passing.
+Tech test for a position of a Software Engineer at some company. My code is in the `identity` directory. The task had a set of failing tests and the goal was to change the code until they all started passing.
 
 Identity Service
 ================
